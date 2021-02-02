@@ -1,0 +1,51 @@
+Title: Digitaler Guide Möggingen
+
+----
+
+Teasertext: Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Etiam porta sem malesuada magna mollis euismod.
+
+----
+
+Map:
+
+- map.png
+
+----
+
+Latnw: 47.769027
+
+----
+
+Lonnw: 8.994262
+
+----
+
+Latse: 47.763431
+
+----
+
+Lonse: 8.999337
+
+----
+
+Headline: 
+
+----
+
+Test: asdf
+
+----
+
+Lon-nw: 
+
+----
+
+Lat-se: 
+
+----
+
+Lon-se: 
+
+----
+
+Lat-nw: asdfasf

@@ -1,8 +1,37 @@
-title: Default Page
-preset: page
-fields:
-  text:
-    label: Text
-    type: textarea
-    size: large
+title: Inhaltsseite
 
+status:
+  draft: Entwurf
+  unlisted: Unsichtbar
+  listed: Veröffentlicht
+
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      content:
+        label: Inhalt
+        type: blocks
+        fieldsets:
+          text:
+            label: Text
+            type: group
+            fieldsets:
+              - heading
+              - text
+              - list
+          media:
+            label: Medien
+            type: group
+            fieldsets:
+              - img-slider
+              - video
+ media:
+  label: Medien
+  sections:
+    files:
+      label: Dateien
+      type: files
+      layout: cards
+      size: tiny

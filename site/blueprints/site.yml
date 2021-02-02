@@ -1,3 +1,52 @@
 title: Site
-preset: pages
-unlisted: true
+columns:
+  - width: 1/2
+    sections:
+
+      drafts:
+        headline: Entfürfe
+        type: pages
+        status: drafts
+        create:
+          - default
+          - location
+          - webview
+        template:
+          - default
+          - location
+          - webview
+
+      invisible:
+        headline: Unsichtbar
+        type: pages
+        status: unlisted
+        create:
+          - default
+          - location
+          - webview
+        template:
+          - default
+          - location
+          - webview
+
+      published:
+        headline: Veröffentlicht
+        type: pages
+        status: listed
+        create:
+          - default
+          - location
+          - webview
+        template:
+          - default
+          - location
+          - webview
+
+
+  - width: 1/2
+      fields:
+        meta:
+          label: Meta Navigation
+          type: pages
+          template:
+            - default

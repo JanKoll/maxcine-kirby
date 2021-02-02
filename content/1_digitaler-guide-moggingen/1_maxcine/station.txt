@@ -1,0 +1,37 @@
+Title: MaxCine
+
+----
+
+Teasertext: MaxCine ist das Zentrum für Kommunikation und Austausch am Institut. Wir informieren über Wissenschaft und integrieren die Öffentlichkeit und insbesondere die Jugend direkt in den Forschungsalltag.
+
+----
+
+Icon:
+
+- hauptgebaude.png
+
+----
+
+Teaserimg:
+
+- maxcine-1.jpg
+
+----
+
+Hastime: true
+
+----
+
+Time: <p><strong>Mo-Do:</strong> 10 bis 18 Uhr</p><p><strong>Fr:</strong> 12 bis 16 Uhr</p>
+
+----
+
+Lat: 47.768057
+
+----
+
+Lon: 8.9966322
+
+----
+
+Content: [{"content":{"level":"h2","text":"Hallo Welt"},"id":"0a201e67-8f14-412b-bce0-7c284c94b1e3","isHidden":false,"type":"heading"},{"content":{"text":"<p>Lorem Ipsum<\/p>"},"id":"fe30a1da-9901-4b7e-b388-7d7596696cc0","isHidden":false,"type":"text"},{"content":{"images":["maxcine-2.jpg","maxcine-3.jpg","maxcine-5.jpg","maxcine-4.jpg"]},"id":"3558629b-2349-4947-83e5-7f3a9448f3fa","isHidden":false,"type":"img-slider"},{"content":{"text":"<ul><li><p>Never<\/p><\/li><li><p>Gonna<\/p><\/li><li><p>Give<\/p><\/li><li><p>You<\/p><\/li><li><p>Up<\/p><\/li><\/ul>"},"id":"ddb71e3e-77e1-4100-ad04-5c0ebfb954f2","isHidden":false,"type":"list"},{"content":{"url":"https:\/\/www.youtube.com\/watch?v=zZFyD8kSaIo","caption":"Lorem Ipsum"},"id":"e8555b08-569b-4ee3-8ac7-9c2aad113d56","isHidden":false,"type":"video"},{"content":{"audio":["file_example_mp3_1mg.mp3"]},"id":"ea6ecf72-07a4-4f7d-959b-a2de01deb8b2","isHidden":false,"type":"audio"}]

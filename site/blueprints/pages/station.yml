@@ -1,0 +1,98 @@
+title: Station
+
+status:
+  draft: Entwurf
+  listed: Veröffentlicht
+
+
+tabs:
+  content:
+    label: Inhalt
+
+    columns:
+      left:
+        width: 1/3
+        fields:
+          teasertext:
+            label: Teaser Text
+            type: textarea
+            size: medium
+
+      middle:
+        width: 1/3
+        fields:
+          icon:
+            label: Icon / Piktogramm
+            type: files
+            multiple: false
+            layout: cards
+            size: tiny
+          teaserimg:
+            label: Teaser Bild
+            type: files
+            multiple: false
+            layout: cards
+            size: tiny
+
+
+      right:
+        width: 1/3
+        fields:
+          hastime:
+            label: Hat Öffnungszeiten
+            type: toggle
+            text:
+              - "Nein"
+              - "Ja"
+          time:
+            label: Öffnungszeiten
+            type: writer
+            size: small
+            when:
+              hastime: true
+
+      body:
+        width: 1
+        fields:
+          lat:
+            label: Längengrad
+            type: text
+            minlength: 7
+            maxlength: 12
+            width: 1/2
+          lon:
+            label: Breitengrad
+            type: text
+            minlength: 7
+            maxlength: 12
+            width: 1/2
+
+          line:
+            type: line
+
+          content:
+            label: Inhalt
+            type: blocks
+            fieldsets:
+              text:
+                label: Text
+                type: group
+                fieldsets:
+                  - heading
+                  - text
+                  - list
+              media:
+                label: Medien
+                type: group
+                fieldsets:
+                  - img-slider
+                  - video
+                  - audio
+ media:
+  label: Medien
+  sections:
+    files:
+      label: Dateien
+      type: files
+      layout: cards
+      size: tiny

@@ -1,0 +1,21 @@
+title: WebView
+
+status:
+  draft: Entwurf
+  listed: Veröffentlicht
+
+columns:
+  left:
+    width: 1/3
+    fields:
+      teasertext:
+        label: Teaser Text
+        type: textarea
+        size: medium
+
+  right:
+    width: 2/3
+    fields:
+      link:
+        label: URL / Link
+        type: text

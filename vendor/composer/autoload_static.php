@@ -27,6 +27,10 @@ class ComposerStaticInit7fb5d0b616c2d77845b94df5c66d6f5d
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
         ),
+        'R' => 
+        array (
+            'Robinscholz\\' => 12,
+        ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
@@ -55,6 +59,10 @@ class ComposerStaticInit7fb5d0b616c2d77845b94df5c66d6f5d
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Robinscholz\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/site/plugins/better-rest/classes',
         ),
         'Psr\\Log\\' => 
         array (
@@ -364,6 +372,7 @@ class ComposerStaticInit7fb5d0b616c2d77845b94df5c66d6f5d
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
+        'Robinscholz\\Betterrest' => __DIR__ . '/../..' . '/site/plugins/better-rest/classes/Betterrest.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
         'TrueBV\\Exception\\DomainOutOfBoundsException' => __DIR__ . '/..' . '/true/punycode/src/Exception/DomainOutOfBoundsException.php',
         'TrueBV\\Exception\\LabelOutOfBoundsException' => __DIR__ . '/..' . '/true/punycode/src/Exception/LabelOutOfBoundsException.php',

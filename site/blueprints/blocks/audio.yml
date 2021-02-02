@@ -1,0 +1,8 @@
+name: Tonspur
+icon: file-audio
+
+fields:
+  audio:
+    label: Tonspur
+    type: files
+    multiple: false

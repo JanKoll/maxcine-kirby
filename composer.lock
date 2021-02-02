@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "904eae1ad1df8921b7d88e4780e86008",
+    "content-hash": "4e833ca3b42a3ca80eb4a8f2cac492ae",
     "packages": [
         {
             "name": "claviska/simpleimage",
@@ -602,6 +602,72 @@
                 "psr-3"
             ],
             "time": "2020-03-23T09:12:05+00:00"
+        },
+        {
+            "name": "robinscholz/better-rest",
+            "version": "1.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robinscholz/better-rest.git",
+                "reference": "912eee6a050c76f87e81efeaf19509fe448b5b3c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robinscholz/better-rest/zipball/912eee6a050c76f87e81efeaf19509fe448b5b3c",
+                "reference": "912eee6a050c76f87e81efeaf19509fe448b5b3c",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/composer-installer": "^1.1",
+                "php": ">=7.2.0"
+            },
+            "require-dev": {
+                "getkirby/cms": "^3.2",
+                "nunomaduro/phpinsights": "^1.8",
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^8.3"
+            },
+            "type": "kirby-plugin",
+            "extra": {
+                "kirby-cms-path": "tests/kirby"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Robinscholz\\": "classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robin Scholz",
+                    "email": "dev@studioscholz.info"
+                },
+                {
+                    "name": "Bruno Meilick",
+                    "email": "b@bnomei.com"
+                }
+            ],
+            "description": "Kirby Plugin for better REST requests",
+            "keywords": [
+                "api",
+                "cms",
+                "headless",
+                "json",
+                "kirby",
+                "kirby3",
+                "kirby3-cms",
+                "kirby3-plugin",
+                "kirbycms",
+                "kirbytag",
+                "kirbytags",
+                "markdown",
+                "rest",
+                "srcset"
+            ],
+            "time": "2019-08-21T14:02:13+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",

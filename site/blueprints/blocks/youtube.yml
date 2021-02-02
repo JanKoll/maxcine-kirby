@@ -1,0 +1,13 @@
+name: Youtube Link
+icon: youtube
+fields:
+  info:
+    label: Info
+    type: info
+    text: |
+      Es wird nur das ende der YouTube URL benötigt (im Beispiel **Fett** Markiert).
+
+      Beispiel: www.youtube.com/watch?v=**yI6lDKKqykU**
+  link:
+    label: YouTube Link
+    type: text

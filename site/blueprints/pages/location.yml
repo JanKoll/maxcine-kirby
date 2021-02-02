@@ -1,0 +1,95 @@
+title: Standort
+
+status:
+  draft: Entwurf
+  unlisted: Ungelistet
+  listed: Gelistet
+
+
+
+tabs:
+  content:
+    label: Inhalt
+
+    columns:
+
+      left:
+        width: 1/3
+        fields:
+          teasertext:
+            label: Teaser Text
+            type: textarea
+            size: small
+            buttons: false
+
+
+      middle:
+        width: 1/3
+        fields:
+          map:
+            label: Karte
+            type: files
+            multiple: false
+            layout: cards
+            size: large
+
+
+      right:
+        width: 1/3
+        fields:
+
+          latnw:
+            label: Längengrad (Nordwest)
+            type: text
+            minlength: 7
+            maxlength: 12
+            width: 1/2
+          lonnw:
+            label: Breitengrad (Nordwest)
+            type: text
+            minlength: 7
+            maxlength: 12
+            width: 1/2
+          latse:
+            label: Längengrad (Südost)
+            type: text
+            minlength: 7
+            maxlength: 12
+            width: 1/2
+          lonse:
+            label: Breitengrad (Südost)
+            type: text
+            minlength: 7
+            maxlength: 12
+            width: 1/2
+
+      bottomline:
+        width: 1
+        fields:
+          line:
+            type: line
+
+      bottom:
+        width: 1
+        sections:
+          drafts:
+            headline: Entwürfe
+            type: pages
+            status: draft
+            templates: station
+
+          published:
+            headline: Gelistet
+            type: pages
+            status: listed
+            templates: station
+
+
+  media:
+    label: Medien
+    sections:
+      files:
+        label: Dateien
+        type: files
+        layout: cards
+        size: tiny
