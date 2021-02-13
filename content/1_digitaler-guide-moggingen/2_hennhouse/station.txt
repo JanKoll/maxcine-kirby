@@ -18,7 +18,7 @@ Teaserimg:
 
 ----
 
-Hastime: true
+Hastime: false
 
 ----
 

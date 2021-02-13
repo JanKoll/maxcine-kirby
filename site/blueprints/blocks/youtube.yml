@@ -1,13 +1,8 @@
-name: Youtube Link
-icon: youtube
+name: Youtube
+icon: video
+preview: video
 fields:
-  info:
-    label: Info
-    type: info
-    text: |
-      Es wird nur das ende der YouTube URL benötigt (im Beispiel **Fett** Markiert).
-
-      Beispiel: www.youtube.com/watch?v=**yI6lDKKqykU**
-  link:
-    label: YouTube Link
-    type: text
+  url:
+    label: field.blocks.video.url.label
+    type: url
+    placeholder: field.blocks.video.url.placeholder

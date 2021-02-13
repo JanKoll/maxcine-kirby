@@ -38,6 +38,7 @@ return [
                   'teasertext' => $page->teasertext()->value(),
                   'children' => $children,
                   'type' => $page->blueprints(),
+                  'link' => $page->link(),
                   'status' => $page->status(),
                   'modified' => $page->modified('YmdHi')
                 )
@@ -71,29 +72,46 @@ return [
               'body' => array(
                   'id' => $this->site()->find($any)->id(),
                   'title' => $this->site()->find($any)->title()->value(),
-                  'map' => $this->site()->find($any)->file(ltrim($this->site()->find($any)->map()->value(), '- '))->url(),
-                  'latnw'   => $this->site()->find($any)->latnw()->value(),
-                  'lonnw'   => $this->site()->find($any)->lonnw()->value(),
-                  'latse'   => $this->site()->find($any)->latse()->value(),
-                  'lonse'   => $this->site()->find($any)->lonse()->value(),
+                  'map' => str_replace('api.', '', $this->site()->find($any)->file(ltrim($this->site()->find($any)->map()->value(), '- '))->url()),
+                  'coords' => array(
+                    'leftTop' => array(
+                      'lat'   => $this->site()->find($any)->latnw()->value(),
+                      'lon'   => $this->site()->find($any)->lonnw()->value()
+                    ),
+                    'rightBot' => array(
+                      'lat'   => $this->site()->find($any)->latse()->value(),
+                      'lon'   => $this->site()->find($any)->lonse()->value()
+                    )
+                  )
+
                 ),
               'children' => array()
             );
 
             foreach ($this->site()->find($any)->children() as $page) {
               $teaserimg;
+              $icon;
 
               if($file = $page->file(ltrim($page->teaserimg()->value(), '- '))) {
                 $teaserimg = $file->crop(500, 357)->url();
+              }
+
+              if($file = $page->file(ltrim($page->icon()->value(), '- '))) {
+                $icon = $file->url();
               }
 
               array_push($data['children'], array(
                   'id' => $page->id(),
                   'title' => $page->title()->value(),
                   'teasertext' => $page->teasertext()->value(),
-                  'teaserimg' => $teaserimg,
-                  'lat'   => $page->lat()->value(),
-                  'lon'   => $page->lon()->value(),
+                  'teaserimg' => str_replace('api.', '', $teaserimg),
+                  'icon' => str_replace('api.', '', $icon),
+                  'coords' => array(
+                    'lat'   => $page->lat()->value(),
+                    'lon'   => $page->lon()->value()
+                  ),
+                  'hastime' => $page->hastime()->value(),
+                  'time' => $page->time()->value()
                 )
               );
             };

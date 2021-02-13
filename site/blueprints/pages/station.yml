@@ -85,8 +85,9 @@ tabs:
                 label: Medien
                 type: group
                 fieldsets:
+                  - img
                   - img-slider
-                  - video
+                  - youtube
                   - audio
  media:
   label: Medien

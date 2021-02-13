@@ -6,4 +6,4 @@ Teasertext: Sed posuere consectetur est at lobortis. Donec ullamcorper nulla non
 
 ----
 
-Link: https://www.google.com/?client=safari
+Link: http://maxcine.cumodis.de

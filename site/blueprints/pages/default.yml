@@ -10,6 +10,11 @@ tabs:
   content:
     label: Inhalt
     fields:
+      teasertext:
+        label: Teaser Text
+        type: textarea
+        size: small
+        buttons: false
       content:
         label: Inhalt
         type: blocks
@@ -25,8 +30,9 @@ tabs:
             label: Medien
             type: group
             fieldsets:
+              - img
               - img-slider
-              - video
+              - youtube
  media:
   label: Medien
   sections:

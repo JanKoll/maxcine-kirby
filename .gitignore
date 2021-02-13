@@ -46,3 +46,8 @@ Icon
 # License
 # ---------------
 /site/config/.license
+
+
+# Accounts
+# ---------------
+/site/accounts

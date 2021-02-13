@@ -2,7 +2,7 @@ Title: Digitaler Guide Möggingen
 
 ----
 
-Teasertext: Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Etiam porta sem malesuada magna mollis euismod.
+Teasertext: Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
 
 ----
 

@@ -1,0 +1,33 @@
+name: Bild
+icon: image
+preview: image
+fields:
+  location:
+    label: field.blocks.image.location
+    type: radio
+    columns: 2
+    default: "kirby"
+    options:
+      kirby: Kirby
+      web: Web
+  image:
+    label: field.blocks.image.name
+    type: files
+    multiple: false
+    image:
+      back: black
+    uploads:
+      template: blocks/image
+    when:
+      location: kirby
+    image:
+      ratio: 4/3
+  src:
+    label: Image URL
+    type: url
+    when:
+      location: web
+  alt:
+    label: field.blocks.image.alt
+    type: text
+    icon: title
