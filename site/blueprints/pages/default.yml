@@ -3,7 +3,7 @@ title: Inhaltsseite
 status:
   draft: Entwurf
   unlisted: Unsichtbar
-  listed: Veröffentlicht
+  # listed: Veröffentlicht
 
 
 tabs:
