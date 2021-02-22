@@ -1,9 +1,0 @@
-Title: Quiz
-
-----
-
-Teasertext: Sed posuere consectetur est at lobortis. Donec ullamcorper nulla non metus auctor fringilla.
-
-----
-
-Link: http://maxcine.cumodis.de

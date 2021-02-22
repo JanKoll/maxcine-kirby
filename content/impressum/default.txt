@@ -1,9 +1,0 @@
-Title: Impressum
-
-----
-
-Teasertext: Test
-
-----
-
-Content: [{"content":{"level":"h2","text":"Hallo Welt"},"id":"7743480c-2ee1-4ea2-86d2-d8c66f399457","isHidden":false,"type":"heading"},{"content":{"text":"<p>Lorem Ipsum<\/p>"},"id":"e97d24f4-8dc6-4bad-89cc-9c1b19cb6b49","isHidden":false,"type":"text"}]
