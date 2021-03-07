@@ -78,50 +78,102 @@ return [
         [
           'pattern' => 'map/(:any)',
           'action'  => function ($any) {
+            $route = $this->site()->find($any);
+
             $data = array(
-              'id' => $this->site()->find($any)->id(),
-              'title' => $this->site()->find($any)->title()->value(),
-              'map' => str_replace('api.', '', $this->site()->find($any)->file(ltrim($this->site()->find($any)->map()->value(), '- '))->base64()),
+              'id' => $route->id(),
+              'title' => $route->title()->value(),
+              'map' => str_replace('api.', '', $route->file(ltrim($this->site()->find($any)->map()->value(), '- '))->base64()),
               'coords' => array(
                 'leftTop' => array(
-                  'lat'   => $this->site()->find($any)->latnw()->value(),
-                  'lon'   => $this->site()->find($any)->lonnw()->value()
+                  'lat'   => $route->latnw()->value(),
+                  'lon'   => $route->lonnw()->value()
                 ),
                 'rightBot' => array(
-                  'lat'   => $this->site()->find($any)->latse()->value(),
-                  'lon'   => $this->site()->find($any)->lonse()->value()
+                  'lat'   => $route->latse()->value(),
+                  'lon'   => $route->lonse()->value()
                 )
               ),
+              'content' => array(),
               'children' => array()
             );
 
-            foreach ($this->site()->find($any)->children() as $page) {
-              $teaserimg;
-              $icon;
+              foreach ($this->site()->find($any)->children() as $page) {
+                $teaserimg;
+                $icon;
 
-              if($file = $page->file(ltrim($page->teaserimg()->value(), '- '))) {
-                $teaserimg = $file->crop(500, 357)->base64();
+                if($file = $page->file(ltrim($page->teaserimg()->value(), '- '))) {
+                  $teaserimg = $file->crop(500, 357)->base64();
+                }
+
+                if($file = $page->file(ltrim($page->icon()->value(), '- '))) {
+                  $icon = $file->base64();
+                }
+
+                array_push($data['children'], array(
+                    'id' => $page->id(),
+                    'title' => $page->title()->value(),
+                    'teasertext' => $page->teasertext()->value(),
+                    'teaserimg' => str_replace('api.', '', $teaserimg),
+                    'icon' => str_replace('api.', '', $icon),
+                    'coords' => array(
+                      'lat'   => $page->lat()->value(),
+                      'lon'   => $page->lon()->value()
+                    ),
+                    'hastime' => $page->hastime()->value(),
+                    'time' => $page->time()->value()
+                  )
+                );
+              };
+
+
+            if ($route->hasstory() == 'true') {
+              foreach(json_decode($route->content()->content()) as $item) {
+
+                  switch ($item->type) {
+                    case 'img':
+                        array_push($data['content'], array(
+                            'content' => array(
+                                'image' => $route->file($item->content->image[0])->crop(500, 357)->base64(),
+                                'alt' => $item->content->alt
+                            ),
+                            'type' => 'img'
+                        ));
+                        break;
+
+                    case 'img-slider':
+
+                          $images = array();
+
+                          foreach($item->content->images as $img) {
+                              array_push($images, $route->file($img)->crop(500, 357)->base64());
+                          }
+
+
+                        array_push($data['content'], array(
+                            'content' => array(
+                                'image' => $images,
+                            ),
+                            'type' => 'img-slider'
+                        ));
+
+                        break;
+
+                    case 'audio':
+                        array_push($data['content'], array(
+                            'content' => array(
+                                'audio' => $route->file($item->content->audio[0])->base64(),
+                            ),
+                            'type' => 'audio'
+                        ));
+                        break;
+
+                    default:
+                        array_push($data['content'], $item);
+                        break;
+                }
               }
-
-              if($file = $page->file(ltrim($page->icon()->value(), '- '))) {
-                $icon = $file->base64();
-              }
-
-              array_push($data['children'], array(
-                  'id' => $page->id(),
-                  'title' => $page->title()->value(),
-                  'teasertext' => $page->teasertext()->value(),
-                  'teaserimg' => str_replace('api.', '', $teaserimg),
-                  'icon' => str_replace('api.', '', $icon),
-                  'coords' => array(
-                    'lat'   => $page->lat()->value(),
-                    'lon'   => $page->lon()->value()
-                  ),
-                  'hastime' => $page->hastime()->value(),
-                  'time' => $page->time()->value()
-                )
-              );
-            };
+            }
 
             return $data;
           }
@@ -358,8 +410,60 @@ return [
                       'lon'   => $page->lonse()->value()
                     )
                   ),
+                  'content' => array(),
                   'children' => $children
                 );
+
+                if ($page->hasstory() == 'true') {
+                  foreach(json_decode($page->content()->content()) as $item) {
+
+                      switch ($item->type) {
+                        case 'img':
+                            array_push($topLvPage['content'], array(
+                                'content' => array(
+                                    'image' => $page->file($item->content->image[0])->crop(500, 357)->base64(),
+                                    'alt' => $item->content->alt
+                                ),
+                                'type' => 'img'
+                            ));
+                            break;
+
+                        case 'img-slider':
+
+                              $images = array();
+
+                              foreach($item->content->images as $img) {
+                                  array_push($images, $page->file($img)->crop(500, 357)->base64());
+                              }
+
+
+                            array_push($topLvPage['content'], array(
+                                'content' => array(
+                                    'image' => $images,
+                                ),
+                                'type' => 'img-slider'
+                            ));
+
+                            break;
+
+                        case 'audio':
+                            array_push($topLvPage['content'], array(
+                                'content' => array(
+                                    'audio' => $page->file($item->content->audio[0])->base64(),
+                                ),
+                                'type' => 'audio'
+                            ));
+                            break;
+
+                        default:
+                            array_push($topLvPage['content'], $item);
+                            break;
+                    }
+                  }
+                }
+
+
+
               } else {
                 $topLvPage = array(
                   'id' => $page->id(),

@@ -1,0 +1,9 @@
+name: Zitate
+icon: quote
+
+fields:
+  quotes:
+    label: Zitate
+    type: blocks
+    fieldsets:
+      - quote

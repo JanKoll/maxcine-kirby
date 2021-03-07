@@ -85,6 +85,40 @@ tabs:
             templates: station
 
 
+  storry:
+    label: Geschichten
+    fields:
+      hasstory:
+        label: Hat Geschichten
+        type: toggle
+        text:
+          - "Nein"
+          - "Ja"
+      content:
+        when:
+          hasstory: true
+        label: Inhalt
+        type: blocks
+        fieldsets:
+          text:
+            label: Text
+            type: group
+            fieldsets:
+              - heading
+              - text
+              - list
+              - quotes
+          media:
+            label: Medien
+            type: group
+            fieldsets:
+              - img
+              - img-slider
+              - youtube
+              - audio
+
+
+
   media:
     label: Medien
     sections:
