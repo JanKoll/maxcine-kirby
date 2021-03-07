@@ -91,6 +91,7 @@ tabs:
                   - heading
                   - text
                   - list
+                  - quotes
               media:
                 label: Medien
                 type: group
