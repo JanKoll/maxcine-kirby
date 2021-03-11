@@ -22,11 +22,7 @@ fields:
       location: kirby
     image:
       ratio: 4/3
-  src:
-    label: Image URL
-    type: url
-    when:
-      location: web
+    translate: false
   alt:
     label: field.blocks.image.alt
     type: text

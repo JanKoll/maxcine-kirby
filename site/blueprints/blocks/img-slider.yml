@@ -13,3 +13,4 @@ fields:
       template: blocks/image
     image:
       ratio: 4/3
+    translate: false

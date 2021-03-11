@@ -32,6 +32,7 @@ tabs:
             multiple: false
             layout: cards
             size: large
+            translate: false
 
 
       right:
@@ -44,24 +45,28 @@ tabs:
             minlength: 7
             maxlength: 12
             width: 1/2
+            translate: false
           lonnw:
             label: Breitengrad (Nordwest)
             type: text
             minlength: 7
             maxlength: 12
             width: 1/2
+            translate: false
           latse:
             label: Längengrad (Südost)
             type: text
             minlength: 7
             maxlength: 12
             width: 1/2
+            translate: false
           lonse:
             label: Breitengrad (Südost)
             type: text
             minlength: 7
             maxlength: 12
             width: 1/2
+            translate: false
 
       bottomline:
         width: 1

@@ -37,12 +37,14 @@ tabs:
             multiple: false
             layout: cards
             size: tiny
+            translate: false
           teaserimg:
             label: Teaser Bild
             type: files
             multiple: false
             layout: cards
             size: tiny
+            translate: false
 
 
       right:
@@ -70,12 +72,14 @@ tabs:
             minlength: 7
             maxlength: 12
             width: 1/2
+            translate: false
           lon:
             label: Breitengrad
             type: text
             minlength: 7
             maxlength: 12
             width: 1/2
+            translate: false
 
           line:
             type: line

@@ -9,13 +9,14 @@
  */
 return [
     'debug' => true,
+    'languages' => true,
     'api' => [
       'basicAuth' => true,
       'allowInsecure' => true,
       'routes' => [
         [
-          'pattern' => 'main',
-          'action'  => function () {
+          'pattern' => '(:any)/main',
+          'action'  => function (string $lang) {
             $data = array();
 
             foreach ($this->site()->children()->listed() as $page) {
@@ -25,7 +26,7 @@ return [
                 if ($child->isListed()) {
                   array_push($children, array(
                       'id' => $child->id(),
-                      'title' => $child->title()->value(),
+                      'title' => $child->content($lang)->title()->value(),
                       'modified' => $child->modified('YmdHi')
                     )
                   );
@@ -34,8 +35,8 @@ return [
 
               array_push($data, array(
                   'id' => $page->id(),
-                  'title' => $page->title()->value(),
-                  'teasertext' => $page->teasertext()->value(),
+                  'title' => $page->content($lang)->title()->value(),
+                  'teasertext' => $page->content($lang)->teasertext()->value(),
                   'children' => $children,
                   'type' => $page->blueprints(),
                   'link' => $page->link(),
@@ -49,14 +50,14 @@ return [
           }
         ],
         [
-          'pattern' => 'meta',
-          'action'  => function () {
+          'pattern' => '(:any)/meta',
+          'action'  => function (string $lang) {
             $data = array();
 
             foreach ($this->site()->meta()->toPages() as $page) {
               array_push($data, array(
                   'id' => $page->id(),
-                  'title' => $page->title()->value(),
+                  'title' => $page->content($lang)->title()->value(),
                   'modified' => $page->modified('YmdHi')
                 )
               );
@@ -76,13 +77,13 @@ return [
           }
         ],
         [
-          'pattern' => 'map/(:any)',
-          'action'  => function ($any) {
+          'pattern' => '(:any)/map/(:any)',
+          'action'  => function (string $lang, string $any) {
             $route = $this->site()->find($any);
 
             $data = array(
               'id' => $route->id(),
-              'title' => $route->title()->value(),
+              'title' => $route->content($lang)->title()->value(),
               'map' => str_replace('api.', '', $route->file(ltrim($this->site()->find($any)->map()->value(), '- '))->base64()),
               'coords' => array(
                 'leftTop' => array(
@@ -112,8 +113,8 @@ return [
 
                 array_push($data['children'], array(
                     'id' => $page->id(),
-                    'title' => $page->title()->value(),
-                    'teasertext' => $page->teasertext()->value(),
+                    'title' => $page->content($lang)->title()->value(),
+                    'teasertext' => $page->content($lang)->teasertext()->value(),
                     'teaserimg' => str_replace('api.', '', $teaserimg),
                     'icon' => str_replace('api.', '', $icon),
                     'coords' => array(
@@ -121,14 +122,14 @@ return [
                       'lon'   => $page->lon()->value()
                     ),
                     'hastime' => $page->hastime()->value(),
-                    'time' => $page->time()->value()
+                    'time' => $page->content($lang)->time()->value()
                   )
                 );
               };
 
 
             if ($route->hasstory() == 'true') {
-              foreach(json_decode($route->content()->content()) as $item) {
+              foreach(json_decode($route->content($lang)->content()) as $item) {
 
                   switch ($item->type) {
                     case 'img':
@@ -179,19 +180,19 @@ return [
           }
         ],
         [
-          'pattern' => 'article/(:any)',
-          'action'  => function ($any) {
+          'pattern' => '(:any)/article/(:any)',
+          'action'  => function (string $lang, string $any) {
                 $route = $this->site()->find($any);
 
                 $data = array(
                     'id' => $route->id(),
-                    'title' => $route->title()->value(),
-                    'teasertext' => $route->teasertext()->value(),
+                    'title' => $route->content($lang)->title()->value(),
+                    'teasertext' => $route->content($lang)->teasertext()->value(),
                     'template' => $route->template()->name(),
                     'content' => array()
                 );
 
-              foreach(json_decode($route->content()->content()) as $item) {
+              foreach(json_decode($route->content($lang)->content()) as $item) {
 
                   switch ($item->type) {
                     case 'img':
@@ -231,6 +232,21 @@ return [
                         ));
                         break;
 
+                    case 'quotes':
+                        $quotes = array();
+
+
+                        foreach($item->content as $quote) {
+                            array_push($quotes, json_decode($quote));
+                        }
+
+                        array_push($data['content'], array(
+                            'content' => $quotes[0],
+                            'type' => 'quotes'
+                        ));
+
+                        break;
+
                     default:
                         array_push($data['content'], $item);
                         break;
@@ -241,25 +257,25 @@ return [
           }
         ],
         [
-          'pattern' => 'article/(:any)/(:all)',
-          'action'  => function ($any, $all) {
+          'pattern' => '(:any)/article/(:any)/(:any)',
+          'action'  => function (string $lang, string $any, string $all) {
                 $route = $this->site()->find($any)->children()->find($all);
 
                 $data = array(
                     'id' => $route->id(),
-                    'title' => $route->title()->value(),
-                    'teasertext' => $route->teasertext()->value(),
+                    'title' => $route->content($lang)->title()->value(),
+                    'teasertext' => $route->content($lang)->teasertext()->value(),
                     'teaserimg' => $route->file(ltrim($route->teaserimg()->value(), '- '))->crop(500, 357)->base64(),
                     'icon' => $route->file(ltrim($route->icon()->value(), '- '))->base64(),
                     'hastime' => $route->hastime()->value(),
-                    'time' => $route->time()->value(),
+                    'time' => $route->content($lang)->time()->value(),
                     'lat' => $route->lat()->value(),
                     'lon' => $route->lon()->value(),
                     'template' => $route->template()->name(),
                     'content' => array()
                 );
 
-              foreach(json_decode($route->content()->content()) as $item) {
+              foreach(json_decode($route->content($lang)->content()) as $item) {
 
                   switch ($item->type) {
                     case 'img':
@@ -299,6 +315,21 @@ return [
                         ));
                         break;
 
+                    case 'quotes':
+                        $quotes = array();
+
+
+                        foreach($item->content as $quote) {
+                            array_push($quotes, json_decode($quote));
+                        }
+
+                        array_push($data['content'], array(
+                            'content' => $quotes[0],
+                            'type' => 'quotes'
+                        ));
+
+                        break;
+
                     default:
                         array_push($data['content'], $item);
                         break;
@@ -309,8 +340,8 @@ return [
           }
         ],
         [
-          'pattern' => 'download',
-          'action'  => function () {
+          'pattern' => '(:any)/download',
+          'action'  => function (string $lang) {
             $data = array(
               'main' => array(),
               'meta' => array()
@@ -325,12 +356,12 @@ return [
                 $thischild = array(
                     'modified' => $child->modified('YmdHi'),
                     'id' => $child->id(),
-                    'title' => $child->title()->value(),
-                    'teasertext' => $child->teasertext()->value(),
+                    'title' => $child->content($lang)->title()->value(),
+                    'teasertext' => $child->content($lang)->teasertext()->value(),
                     'teaserimg' => $child->file(ltrim($child->teaserimg()->value(), '- '))->crop(500, 357)->base64(),
                     'icon' => $child->file(ltrim($child->icon()->value(), '- '))->base64(),
                     'hastime' => $child->hastime()->value(),
-                    'time' => $child->time()->value(),
+                    'time' => $child->content($lang)->time()->value(),
                     'coords' => array(
                       'lat' => $child->lat()->value(),
                       'lon' => $child->lon()->value(),
@@ -339,7 +370,7 @@ return [
                     'content' => array()
                   );
 
-                foreach(json_decode($child->content()->content()) as $item) {
+                foreach(json_decode($child->content($lang)->content()) as $item) {
                     switch ($item->type) {
                       case 'img':
                           array_push($thischild['content'], array(
@@ -393,8 +424,8 @@ return [
               if ($page->map()->exists()) {
                 $topLvPage = array(
                   'id' => $page->id(),
-                  'title' => $page->title()->value(),
-                  'teasertext' => $page->teasertext()->value(),
+                  'title' => $page->content($lang)->title()->value(),
+                  'teasertext' => $page->content($lang)->teasertext()->value(),
                   'map' => $page->map()->toFile()->base64(),
                   'type' => $page->blueprints(),
                   'link' => $page->link(),
@@ -415,7 +446,7 @@ return [
                 );
 
                 if ($page->hasstory() == 'true') {
-                  foreach(json_decode($page->content()->content()) as $item) {
+                  foreach(json_decode($page->content($lang)->content()) as $item) {
 
                       switch ($item->type) {
                         case 'img':
@@ -467,8 +498,8 @@ return [
               } else {
                 $topLvPage = array(
                   'id' => $page->id(),
-                  'title' => $page->title()->value(),
-                  'teasertext' => $page->teasertext()->value(),
+                  'title' => $page->content($lang)->title()->value(),
+                  'teasertext' => $page->content($lang)->teasertext()->value(),
                   'type' => $page->blueprints(),
                   'link' => $page->link(),
                   'status' => $page->status(),
@@ -484,13 +515,13 @@ return [
 
               $thischild = array(
                   'id' => $page->id(),
-                  'title' => $page->title()->value(),
+                  'title' => $page->content($lang)->title()->value(),
                   'modified' => $page->modified('YmdHi'),
-                  'teasertext' => $page->teasertext()->value(),
+                  'teasertext' => $page->content($lang)->teasertext()->value(),
                   'content' => array()
               );
 
-              foreach(json_decode($page->content()->content()) as $item) {
+              foreach(json_decode($page->content($lang)->content()) as $item) {
                   switch ($item->type) {
                     case 'img':
                         array_push($thischild['content'], array(
