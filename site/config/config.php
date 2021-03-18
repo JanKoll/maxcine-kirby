@@ -8,7 +8,7 @@
  * All config options: https://getkirby.com/docs/reference/system/options
  */
 return [
-    'debug' => true,
+    'debug' => false,
     'languages' => true,
     'api' => [
       'basicAuth' => true,
@@ -95,7 +95,7 @@ return [
                   'lon'   => $route->lonse()->value()
                 )
               ),
-              'content' => array(),
+              'hasstory' => $route->hasstory()->value(),
               'children' => array()
             );
 
@@ -127,55 +127,6 @@ return [
                 );
               };
 
-
-            if ($route->hasstory() == 'true') {
-              foreach(json_decode($route->content($lang)->content()) as $item) {
-
-                  switch ($item->type) {
-                    case 'img':
-                        array_push($data['content'], array(
-                            'content' => array(
-                                'image' => $route->file($item->content->image[0])->crop(500, 357)->base64(),
-                                'alt' => $item->content->alt
-                            ),
-                            'type' => 'img'
-                        ));
-                        break;
-
-                    case 'img-slider':
-
-                          $images = array();
-
-                          foreach($item->content->images as $img) {
-                              array_push($images, $route->file($img)->crop(500, 357)->base64());
-                          }
-
-
-                        array_push($data['content'], array(
-                            'content' => array(
-                                'image' => $images,
-                            ),
-                            'type' => 'img-slider'
-                        ));
-
-                        break;
-
-                    case 'audio':
-                        array_push($data['content'], array(
-                            'content' => array(
-                                'audio' => $route->file($item->content->audio[0])->base64(),
-                            ),
-                            'type' => 'audio'
-                        ));
-                        break;
-
-                    default:
-                        array_push($data['content'], $item);
-                        break;
-                }
-              }
-            }
-
             return $data;
           }
         ],
@@ -189,6 +140,7 @@ return [
                     'title' => $route->content($lang)->title()->value(),
                     'teasertext' => $route->content($lang)->teasertext()->value(),
                     'template' => $route->template()->name(),
+                    'children' => $route->hasChildren(),
                     'content' => array()
                 );
 
@@ -441,60 +393,56 @@ return [
                       'lon'   => $page->lonse()->value()
                     )
                   ),
+                  'hasstory' => $page->hasstory()->value(),
                   'content' => array(),
                   'children' => $children
                 );
 
-                if ($page->hasstory() == 'true') {
-                  foreach(json_decode($page->content($lang)->content()) as $item) {
+  							foreach(json_decode($page->content($lang)->content()) as $item) {
 
-                      switch ($item->type) {
-                        case 'img':
-                            array_push($topLvPage['content'], array(
-                                'content' => array(
-                                    'image' => $page->file($item->content->image[0])->crop(500, 357)->base64(),
-                                    'alt' => $item->content->alt
-                                ),
-                                'type' => 'img'
-                            ));
-                            break;
+  									switch ($item->type) {
+  										case 'img':
+  												array_push($topLvPage['content'], array(
+  														'content' => array(
+  																'image' => $page->file($item->content->image[0])->crop(500, 357)->base64(),
+  																'alt' => $item->content->alt
+  														),
+  														'type' => 'img'
+  												));
+  												break;
 
-                        case 'img-slider':
+  										case 'img-slider':
 
-                              $images = array();
+  													$images = array();
 
-                              foreach($item->content->images as $img) {
-                                  array_push($images, $page->file($img)->crop(500, 357)->base64());
-                              }
-
-
-                            array_push($topLvPage['content'], array(
-                                'content' => array(
-                                    'image' => $images,
-                                ),
-                                'type' => 'img-slider'
-                            ));
-
-                            break;
-
-                        case 'audio':
-                            array_push($topLvPage['content'], array(
-                                'content' => array(
-                                    'audio' => $page->file($item->content->audio[0])->base64(),
-                                ),
-                                'type' => 'audio'
-                            ));
-                            break;
-
-                        default:
-                            array_push($topLvPage['content'], $item);
-                            break;
-                    }
-                  }
-                }
+  													foreach($item->content->images as $img) {
+  															array_push($images, $page->file($img)->crop(500, 357)->base64());
+  													}
 
 
+  												array_push($topLvPage['content'], array(
+  														'content' => array(
+  																'image' => $images,
+  														),
+  														'type' => 'img-slider'
+  												));
 
+  												break;
+
+  										case 'audio':
+  												array_push($topLvPage['content'], array(
+  														'content' => array(
+  																'audio' => $page->file($item->content->audio[0])->base64(),
+  														),
+  														'type' => 'audio'
+  												));
+  												break;
+
+  										default:
+  												array_push($topLvPage['content'], $item);
+  												break;
+  								}
+  							}
               } else {
                 $topLvPage = array(
                   'id' => $page->id(),
